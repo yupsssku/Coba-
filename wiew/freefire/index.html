@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Up Free Fire - GamesNow</title>
+    <link rel="icon" href="https://reygenteng.github.io/gamesku/gamesnow.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            padding-bottom: 80px;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            height: 30px;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-icons img {
+            width: 24px;
+            cursor: pointer;
+        }
+        
+        .header-icons .btn-masuk {
+            padding: 8px 15px;
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .breadcrumbs {
+            padding: 15px;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .breadcrumbs a {
+            text-decoration: none;
+            color: #888;
+        }
+
+        .game-info {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .game-info img {
+            width: 60px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .game-info h2 {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .game-info p {
+            margin: 0;
+            font-size: 0.8em;
+            color: #ff4500;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e0e0e0;
+            background-color: #fff;
+        }
+        
+        .tab-item {
+            flex-grow: 1;
+            text-align: center;
+            padding: 15px 0;
+            font-weight: bold;
+            color: #888;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tab-item.active {
+            color: #ff4500;
+        }
+
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #ff4500;
+        }
+        
+        .content-tab {
+            display: none;
+        }
+        
+        .content-tab.active {
+            display: block;
+        }
+
+        .step-section {
+            padding: 15px;
+        }
+
+        .step-section h3 {
+            font-size: 1em;
+            color: #ff4500;
+            margin-bottom: 10px;
+        }
+
+        .step-section h3 span {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .info-bar {
+            background-color: #ffedf0;
+            color: #ff4500;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .filter-buttons a {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        .filter-buttons a.active {
+            background-color: #ff4500;
+            color: white;
+            border-color: #ff4500;
+        }
+        
+        .nominal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .nominal-item {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            cursor: pointer;
+        }
+
+        .nominal-item.selected {
+            border: 2px solid #ff4500;
+            box-shadow: 0 4px 8px rgba(255, 69, 0, 0.2);
+        }
+
+        .nominal-item h4 {
+            margin: 0;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .nominal-item h4 img {
+            width: 20px;
+        }
+
+        .nominal-item p {
+            margin: 5px 0 0;
+            font-size: 1em;
+            font-weight: bold;
+            color: #ff4500;
+        }
+        
+        .form-section {
+            background-color: #fff;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .form-section h3 {
+            font-size: 1.1em;
+            color: #ff4500;
+            margin-bottom: 10px;
+        }
+
+        .form-section input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        
+        .payment-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .payment-item.selected {
+            border: 2px solid #ff4500;
+            box-shadow: 0 4px 8px rgba(255, 69, 0, 0.2);
+        }
+
+        .payment-item .info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-item img {
+            height: 24px;
+        }
+
+        .payment-item .price {
+            font-weight: bold;
+        }
+        
+        .sticky-footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px 15px;
+            display: none; /* Sembunyikan dulu */
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            z-index: 99;
+        }
+
+        .sticky-footer .price-info h4 {
+            font-size: 1em;
+            color: #ff4500;
+            margin: 0;
+        }
+        
+        .sticky-footer .price-info p {
+            margin: 0;
+            font-size: 0.8em;
+            color: #888;
+        }
+
+        .sticky-footer .btn-beli {
+            padding: 12px 25px;
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-beli:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        /* --- STYLING MODAL (Pop-up) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 101;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .modal-content .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-body .detail-section {
+            margin-bottom: 15px;
+        }
+
+        .modal-body .detail-section h4 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .modal-body .detail-section p {
+            margin: 5px 0;
+            color: #777;
+        }
+
+        /* --- STYLING KHUSUS MODAL WHATSAPP --- */
+        .modal-body .alert-info {
+            background-color: #e6f7ff;
+            border: 1px solid #91d5ff;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .modal-body .alert-info img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .modal-body .alert-info p {
+            margin: 0;
+            color: #1890ff;
+        }
+        
+        .modal-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn-confirm-wa {
+            background-color: #25D366; /* Warna WhatsApp */
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        /* --- STYLING KHUSUS MODAL QRIS --- */
+        #qrisModal .modal-body {
+            text-align: center;
+        }
+        
+        #qrisImage {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        #qrisNominal {
+            font-weight: bold;
+            color: #ff4500;
+        }
+        
+        #qrisTimer {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #d9534f;
+            margin-top: 10px;
+        }
+        
+        #qrisStatus {
+            font-style: italic;
+            color: #555;
+            margin-top: 10px;
+        }
+        
+        .btn-cancel-qris {
+            background-color: #888;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        /* --- STYLING KHUSUS MODAL STRUK --- */
+        #receiptModal .modal-body {
+            text-align: center;
+        }
+        #receiptModal h2 {
+            color: #4CAF50;
+            margin-top: 0;
+        }
+        .receipt-details {
+            text-align: left;
+            border-top: 1px dashed #ccc;
+            border-bottom: 1px dashed #ccc;
+            padding: 15px 0;
+            margin-top: 15px;
+        }
+        .receipt-details p {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+        }
+        .receipt-details p span:first-child {
+            color: #555;
+        }
+        .receipt-details p span:last-child {
+            font-weight: bold;
+            color: #333;
+        }
+        .btn-close-receipt {
+            background-color: #ff4500;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://reygenteng.github.io/gamesku/gamesnow.png" alt="GamesNow Logo" class="logo">
+        <div class="header-icons">
+            <img src="https://api.iconify.design/ic:baseline-search.svg" alt="Search">
+            <img src="https://api.iconify.design/ic:baseline-account-circle.svg" alt="Akun">
+            <button class="btn-masuk">Masuk</button>
+        </div>
+    </header>
+
+    <div class="breadcrumbs">
+        <a href="index.html">Home</a> / Top Up FF (Free Fire)
+    </div>
+
+    <div class="game-info">
+        <img src="https://reygenteng.github.io/gamesku/ff.png" alt="Free Fire Logo">
+        <div>
+            <p>TOP UP</p>
+            <h2>Top Up FF (Free Fire)</h2>
+            <p style="color:#888; font-size:0.8em;">Lihat cara transaksi</p>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab-item active" data-tab="pembelian">Pembelian</div>
+        <div class="tab-item" data-tab="gift-voucher">Gift Voucher</div>
+    </div>
+
+    <main>
+        <div id="pembelian-content" class="content-tab active">
+            <div class="step-section">
+                <h3><span>1</span> Pilih nominal</h3>
+                <div class="info-bar">⚡ 42.867 item dibeli hari ini!</div>
+
+                <div class="filter-buttons">
+                    <a href="#" data-filter="all" class="active">Semua Diamond</a>
+                    <a href="#" data-filter="termurah">Pasti Termurah!</a>
+                    <a href="#" data-filter="membership">Membership</a>
+                </div>
+
+                <div class="nominal-grid">
+                    <div class="nominal-item" data-price="1002" data-code="FF5" data-diamonds="5 Diamond" data-category="all termurah">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 5 Diamond</h4>
+                        <p>Rp1.002</p>
+                    </div>
+                    <div class="nominal-item" data-price="1926" data-code="FF12" data-diamonds="12 Diamond" data-category="all termurah">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 12 Diamond</h4>
+                        <p>Rp1.926</p>
+                    </div>
+                    <div class="nominal-item" data-price="2008" data-code="FF10" data-diamonds="10 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 10 Diamond</h4>
+                        <p>Rp2.008</p>
+                    </div>
+                    <div class="nominal-item" data-price="2702" data-code="FF15" data-diamonds="15 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 15 Diamond</h4>
+                        <p>Rp2.702</p>
+                    </div>
+                    <div class="nominal-item" data-price="3865" data-code="FF20" data-diamonds="20 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 20 Diamond</h4>
+                        <p>Rp3.865</p>
+                    </div>
+                    <div class="nominal-item" data-price="4666" data-code="FF25" data-diamonds="25 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 25 Diamond</h4>
+                        <p>Rp4.666</p>
+                    </div>
+                    <div class="nominal-item" data-price="5621" data-code="FF30" data-diamonds="30 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 30 Diamond</h4>
+                        <p>Rp5.621</p>
+                    </div>
+                    <div class="nominal-item" data-price="6921" data-code="FF55" data-diamonds="55 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 55 Diamond</h4>
+                        <p>Rp6.921</p>
+                    </div>
+                    <div class="nominal-item" data-price="7511" data-code="FF40" data-diamonds="40 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 40 Diamond</h4>
+                        <p>Rp7.511</p>
+                    </div>
+                    <div class="nominal-item" data-price="7892" data-code="FF60" data-diamonds="60 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 60 Diamond</h4>
+                        <p>Rp7.892</p>
+                    </div>
+                    <div class="nominal-item" data-price="7682" data-code="FF50" data-diamonds="50 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 50 Diamond</h4>
+                        <p>Rp7.682</p>
+                    </div>
+                    <div class="nominal-item" data-price="10202" data-code="FF70" data-diamonds="70 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 70 Diamond</h4>
+                        <p>Rp10.202</p>
+                    </div>
+                    <div class="nominal-item" data-price="10307" data-code="FF75" data-diamonds="75 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 75 Diamond</h4>
+                        <p>Rp10.307</p>
+                    </div>
+                    <div class="nominal-item" data-price="10907" data-code="FF80" data-diamonds="80 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 80 Diamond</h4>
+                        <p>Rp10.907</p>
+                    </div>
+                    <div class="nominal-item" data-price="12502" data-code="FF95" data-diamonds="95 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 95 Diamond</h4>
+                        <p>Rp12.502</p>
+                    </div>
+                    <div class="nominal-item" data-price="12507" data-code="FF90" data-diamonds="90 Diamond" data-category="all">
+                        <h4><img src="https://reygenteng.github.io/gamesku/Picsart_25-09-06_00-05-24-447.png" alt="Diamond Icon"> 90 Diamond</h4>
+                        <p>Rp12.507</p>
+                    </div>
+                    </div>
+            </div>
+            
+            <div class="step-section form-section">
+                <h3><span>2</span> Masukkan jumlah pembelian</h3>
+                <input type="number" value="1" id="quantityInput" disabled>
+                <small style="color: #888;">*Fitur jumlah pembelian belum didukung, otomatis 1.</small>
+            </div>
+
+            <div class="step-section form-section">
+                <h3><span>3</span> Pilih metode bayar</h3>
+                <div class="payment-grid">
+                    <div class="payment-item" data-name="QRIS">
+                        <div class="info">
+                            <img src="https://raw.githubusercontent.com/ReyGenteng/reybelirbx/refs/heads/main/belirobux/qris.png" alt="QRIS Logo">
+                            <span>QRIS (Bayar Langsung)</span>
+                        </div>
+                        <span class="price"></span>
+                    </div>
+                    <div class="payment-item" data-name="DANA">
+                        <div class="info">
+                            <img src="https://reygenteng.github.io/reybelirbx/belirobux/dana.png" alt="DANA Logo">
+                            <span>DANA (via WhatsApp)</span>
+                        </div>
+                        <span class="price"></span>
+                    </div>
+                    <div class="payment-item" data-name="GoPay">
+                        <div class="info">
+                            <img src="https://reygenteng.github.io/reybelirbx/belirobux/gopay.png" alt="Gopay Logo">
+                            <span>GoPay (via WhatsApp)</span>
+                        </div>
+                        <span class="price"></span>
+                    </div>
+                    <div class="payment-item" data-name="OVO">
+                        <div class="info">
+                            <img src="https://reygenteng.github.io/reybelirbx/belirobux/ovo.png" alt="OVO Logo">
+                            <span>OVO (via WhatsApp)</span>
+                        </div>
+                        <span class="price"></span>
+                    </div>
+                    <div class="payment-item" data-name="ShopeePay">
+                        <div class="info">
+                            <img src="https://reygenteng.github.io/reybelirbx/belirobux/shopeepay.png" alt="ShopeePay Logo">
+                            <span>ShopeePay (via WhatsApp)</span>
+                        </div>
+                        <span class="price"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-section form-section">
+                <h3><span>4</span> Masukkan detail akun</h3>
+                <input type="text" placeholder="Masukkan User ID" id="userIdInput">
+            </div>
+
+            <div class="step-section form-section">
+                <h3><span>5</span> Masukkan info kontak</h3>
+                <input type="email" placeholder="Masukkan email (opsional)">
+            </div>
+            
+            <div class="step-section form-section">
+                <h3><span>6</span> Punya kode promo?</h3>
+                <input type="text" placeholder="Masukkan kode promo">
+            </div>
+        </div>
+
+        <div id="gift-voucher-content" class="content-tab">
+            <div class="step-section" style="text-align:center;">
+                <h3>Maaf, halaman ini belum tersedia.</h3>
+                <p>Silakan kembali ke tab Pembelian.</p>
+            </div>
+        </div>
+    </main>
+
+    <div class="sticky-footer">
+        <div class="price-info">
+            <h4>Rp<span id="finalPrice">0</span></h4>
+            <p><span id="finalDiamonds">Pilih Produk</span>, <span id="finalPayment">Pilih Pembayaran</span></p>
+        </div>
+        <a href="#" class="btn-beli">Beli Sekarang</a>
+    </div>
+
+    <div id="whatsappModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeWhatsappModal">&times;</span>
+            <div class="modal-body">
+                <div class="alert-info">
+                    <img src="https://i.imgur.com/gK9JgP5.png" alt="Info Icon" class="alert-icon">
+                    <p>Pastikan detail pembelian benar.</p>
+                </div>
+                <div class="detail-section">
+                    <h4>Detail Produk</h4>
+                    <p>Nominal: <span id="popupDiamonds"></span></p>
+                    <p>Jumlah: 1</p>
+                </div>
+                <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+                <div class="detail-section">
+                    <h4>Detail Bayar</h4>
+                    <p>Total transaksi: Rp<span id="popupPrice"></span></p>
+                    <p>Bayar dengan: <span id="popupPaymentMethod"></span></p>
+                </div>
+                <div class="detail-section">
+                    <h4>Detail Akun</h4>
+                    <p>User ID: <span id="popupUserId"></span></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="confirmWhatsappButton" class="btn-confirm-wa">Lanjutkan ke WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="qrisModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeQrisModal">&times;</span>
+            <div class="modal-body">
+                <h4>Selesaikan Pembayaran</h4>
+                <p>Scan QR code di bawah ini untuk membayar</p>
+                <img src="httpsa://via.placeholder.com/250" alt="QR Code" id="qrisImage">
+                <p>Nominal: <strong>Rp<span id="qrisNominal">0</span></strong></p>
+                <p id="qrisTimer">15:00</p>
+                <p id="qrisStatus">Menunggu pembayaran...</p>
+                <button id="cancelQrisButton" class="btn-cancel-qris">Batalkan</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="receiptModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeReceiptModal">&times;</span>
+            <div class="modal-body">
+                <h2 id="receiptTitle">Transaksi Berhasil</h2>
+                <div class="receipt-details">
+                    <p><span>Produk:</span> <span id="receiptProduct"></span></p>
+                    <p><span>User ID:</span> <span id="receiptUserId"></span></p>
+                    <p><span>Harga:</span> <span>Rp<span id="receiptPrice"></span></span></p>
+                    <p><span>Metode Bayar:</span> <span id="receiptPayment"></span></p>
+                    <p><span>Status:</span> <span id="receiptStatus"></span></p>
+                    <p><span>No. Transaksi:</span> <span id="receiptTrxId"></span></p>
+                </div>
+                <button id="closeReceiptButton" class="btn-close-receipt">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+      // --- Variabel Global untuk Status ---
+        let selectedNominal = null;
+        let selectedPayment = null;
+        let qrisTimerInterval = null;
+        let qrisPollingInterval = null;
+        let currentDepositId = null;
+
+        // --- Ambil Elemen DOM ---
+        const nominalItems = document.querySelectorAll('.nominal-item');
+        const paymentItems = document.querySelectorAll('.payment-item');
+        const finalPriceElement = document.getElementById('finalPrice');
+        const finalDiamondsElement = document.getElementById('finalDiamonds');
+        const finalPaymentElement = document.getElementById('finalPayment');
+        const tabItems = document.querySelectorAll('.tab-item');
+        const filterButtons = document.querySelectorAll('.filter-buttons a');
+        const beliButton = document.querySelector('.btn-beli');
+        const userIdInput = document.getElementById('userIdInput');
+        
+        // Modal WhatsApp
+        const whatsappModal = document.getElementById('whatsappModal');
+        const closeWhatsappModal = document.getElementById('closeWhatsappModal');
+        const confirmWhatsappButton = document.getElementById('confirmWhatsappButton');
+
+        // Modal QRIS
+        const qrisModal = document.getElementById('qrisModal');
+        const closeQrisModal = document.getElementById('closeQrisModal');
+        const cancelQrisButton = document.getElementById('cancelQrisButton');
+
+        // Modal Struk
+        const receiptModal = document.getElementById('receiptModal');
+        const closeReceiptModal = document.getElementById('closeReceiptModal');
+        const closeReceiptButton = document.getElementById('closeReceiptButton');
+
+
+        // --- Fungsi untuk Tab ---
+        tabItems.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabItems.forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.content-tab').forEach(c => c.classList.remove('active'));
+
+                const tabId = tab.dataset.tab;
+                tab.classList.add('active');
+                document.getElementById(`${tabId}-content`).classList.add('active');
+            });
+        });
+
+        // --- Fungsi untuk Filter ---
+        filterButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filter = button.dataset.filter;
+                nominalItems.forEach(item => {
+                    const categories = item.dataset.category || "all";
+                    if (filter === 'all' || categories.includes(filter)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // --- Fungsi untuk Nominal & Pembayaran ---
+        nominalItems.forEach(item => {
+            item.addEventListener('click', () => {
+                nominalItems.forEach(i => i.classList.remove('selected'));
+                item.classList.add('selected');
+                selectedNominal = item;
+                updateFooter();
+            });
+        });
+
+        paymentItems.forEach(item => {
+            item.addEventListener('click', () => {
+                paymentItems.forEach(i => i.classList.remove('selected'));
+                item.classList.add('selected');
+                selectedPayment = item;
+                updateFooter();
+            });
+        });
+
+        function updateFooter() {
+            let price = 0;
+            let diamonds = "Pilih Produk";
+            let payment = "Pilih Pembayaran";
+
+            if (selectedNominal) {
+                price = parseInt(selectedNominal.dataset.price);
+                diamonds = selectedNominal.dataset.diamonds;
+            }
+            if (selectedPayment) {
+                payment = selectedPayment.dataset.name;
+            }
+
+            finalPriceElement.textContent = price.toLocaleString('id-ID');
+            finalDiamondsElement.textContent = diamonds;
+            finalPaymentElement.textContent = payment;
+
+            if (selectedNominal && selectedPayment) {
+                document.querySelector('.sticky-footer').style.display = 'flex';
+            } else {
+                document.querySelector('.sticky-footer').style.display = 'none';
+            }
+        }
+
+        // --- Fungsi Tombol Beli Utama ---
+        beliButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const userId = userIdInput.value;
+            if (!selectedNominal || !selectedPayment || !userId) {
+                alert('Mohon lengkapi semua data: nominal, metode bayar, dan User ID.');
+                return;
+            }
+            
+            const paymentName = selectedPayment.dataset.name;
+            
+            if (paymentName.includes('QRIS')) {
+                // LOGIKA BARU: Panggil API QRIS
+                handleQrisPayment();
+            } else {
+                // LOGIKA LAMA: Buka Modal WhatsApp
+                showWhatsappModal();
+            }
+        });
+
+        // --- LOGIKA 1: Pembayaran via WhatsApp ---
+        function showWhatsappModal() {
+            const price = parseInt(selectedNominal.dataset.price).toLocaleString('id-ID');
+            const diamonds = selectedNominal.dataset.diamonds;
+            const userId = userIdInput.value;
+            const paymentMethod = selectedPayment.dataset.name;
+
+            document.getElementById('popupPrice').textContent = price;
+            document.getElementById('popupDiamonds').textContent = diamonds;
+            document.getElementById('popupUserId').textContent = userId;
+            document.getElementById('popupPaymentMethod').textContent = paymentMethod;
+
+            whatsappModal.style.display = 'block';
+        }
+
+        confirmWhatsappButton.addEventListener('click', () => {
+            const diamonds = document.getElementById('popupDiamonds').textContent;
+            const price = document.getElementById('popupPrice').textContent;
+            const userId = document.getElementById('popupUserId').textContent;
+            const paymentMethod = document.getElementById('popupPaymentMethod').textContent;
+
+            const waText = `Halo Kak, mau top up ${diamonds} seharga Rp${price} (User ID: ${userId}). Bayar via ${paymentMethod}.`;
+            const waUrl = `https://wa.me/${NOMOR_WHATSAPP}?text=${encodeURIComponent(waText)}`;
+
+            window.location.href = waUrl;
+        });
+
+        closeWhatsappModal.addEventListener('click', () => {
+            whatsappModal.style.display = 'none';
+        });
+
+        // --- LOGIKA 2: Pembayaran via QRIS (API) ---
+
+        // Fungsi untuk memanggil API
+        async function callApi(endpoint, data) {
+            const url = `${API_BASE_URL}${endpoint}`;
+            
+            const body = new URLSearchParams();
+            for (const key in data) {
+                body.append(key, data[key]);
+            }
+            body.append('api_key', API_KEY);
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: body
+                });
+                return await response.json();
+            } catch (error) {
+                console.error('API Call Error:', error);
+                return { status: false, message: 'Terjadi kesalahan jaringan: ' + error.message };
+            }
+        }
+
+        // Langkah 2.1: Buat Deposit QRIS
+        async function handleQrisPayment() {
+            beliButton.textContent = 'Memproses...';
+            beliButton.disabled = true;
+
+            const nominal = parseInt(selectedNominal.dataset.price);
+            const reff_id = `GN-FF-${Date.now()}`; // Reff ID unik
+
+            const data = {
+                reff_id: reff_id,
+                nominal: nominal,
+                type: 'ewallet',
+                metode: 'qrisfast'
+            };
+
+            const response = await callApi('/deposit/create', data);
+
+            if (response.status === true) {
+                const depositData = response.data;
+                currentDepositId = depositData.id;
+
+                // Tampilkan Modal QRIS
+                document.getElementById('qrisImage').src = depositData.qr_image;
+                document.getElementById('qrisNominal').textContent = depositData.nominal.toLocaleString('id-ID');
+                document.getElementById('qrisStatus').textContent = 'Silakan scan QR untuk membayar...';
+                qrisModal.style.display = 'block';
+
+                // Siapkan data untuk langkah selanjutnya (top up)
+                const orderDetails = {
+                    depositId: depositData.id,
+                    productCode: selectedNominal.dataset.code,
+                    productName: selectedNominal.dataset.diamonds,
+                    userId: userIdInput.value,
+                    price: depositData.nominal
+                };
+
+                // Mulai timer dan polling
+                const expiryTime = new Date(depositData.expired_at).getTime();
+                startQrisTimer(expiryTime, depositData.id);
+                startPollingDepositStatus(orderDetails);
+
+            } else {
+                alert('Gagal membuat QRIS: ' + (response.message || 'Error tidak diketahui'));
+                beliButton.textContent = 'Beli Sekarang';
+                beliButton.disabled = false;
+            }
+        }
+
+        // Langkah 2.2: Hitung Mundur Timer
+        function startQrisTimer(expiryTime, depositId) {
+            clearInterval(qrisTimerInterval); // Hapus timer lama jika ada
+
+            qrisTimerInterval = setInterval(() => {
+                const now = Date.now();
+                const remaining = expiryTime - now;
+
+                if (remaining <= 0) {
+                    clearInterval(qrisTimerInterval);
+                    document.getElementById('qrisTimer').textContent = "00:00";
+                    document.getElementById('qrisStatus').textContent = "Waktu pembayaran habis.";
+                    // Otomatis batalkan jika waktu habis DAN user belum bayar
+                    if (currentDepositId === depositId) {
+                        cancelQrisPayment();
+                    }
+                } else {
+                    const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+                    document.getElementById('qrisTimer').textContent = 
+                        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
+        // Langkah 2.3: Cek Status Pembayaran (Polling)
+        function startPollingDepositStatus(orderDetails) {
+            clearInterval(qrisPollingInterval); // Hapus polling lama jika ada
+
+            qrisPollingInterval = setInterval(async () => {
+                // Pastikan modal masih terbuka dan ID deposit masih sama
+                if (qrisModal.style.display !== 'block' || currentDepositId !== orderDetails.depositId) {
+                    clearInterval(qrisPollingInterval);
+                    return;
+                }
+
+                const response = await callApi('/deposit/status', { id: orderDetails.depositId });
+
+                if (response.status === true) {
+                    const status = response.data.status;
+                    
+                    if (status === 'success') {
+                        // BERHASIL BAYAR!
+                        clearInterval(qrisPollingInterval);
+                        clearInterval(qrisTimerInterval);
+                        
+                        document.getElementById('qrisStatus').textContent = 'Pembayaran Berhasil! Memproses top up...';
+                        
+                        // Lanjut ke langkah Top Up
+                        await handleTopUp(orderDetails);
+                    
+                    } else if (status === 'cancel' || status === 'expired') {
+                        // GAGAL BAYAR
+                        clearInterval(qrisPollingInterval);
+                        clearInterval(qrisTimerInterval);
+                        document.getElementById('qrisStatus').textContent = 'Pembayaran dibatalkan atau kedaluwarsa.';
+                    
+                    } else {
+                        // Masih 'pending', biarkan polling berjalan
+                        document.getElementById('qrisStatus').textContent = 'Menunggu pembayaran...';
+                    }
+                } else {
+                    // Error saat cek status, mungkin biarkan polling berjalan
+                    console.error('Gagal cek status deposit:', response.message);
+                }
+
+            }, 3000); // Cek setiap 3 detik (1 detik terlalu cepat & membebani server)
+        }
+
+        // Langkah 2.4: Lakukan Top Up Setelah Bayar Berhasil
+        async function handleTopUp(orderDetails) {
+            const trxReffId = `GN-TOPUP-${Date.now()}`;
+
+            const data = {
+                reff_id: trxReffId,
+                code: orderDetails.productCode,
+                target: orderDetails.userId
+            };
+
+            const response = await callApi('/transaksi/create', data);
+
+            // Tutup modal QRIS
+            qrisModal.style.display = 'none';
+
+            // Tampilkan Struk
+            document.getElementById('receiptProduct').textContent = orderDetails.productName;
+            document.getElementById('receiptUserId').textContent = orderDetails.userId;
+            document.getElementById('receiptPrice').textContent = orderDetails.price.toLocaleString('id-ID');
+            document.getElementById('receiptPayment').textContent = 'QRIS';
+
+            if (response.status === true) {
+                document.getElementById('receiptTitle').textContent = 'Transaksi Diproses';
+                document.getElementById('receiptStatus').textContent = response.data.status;
+                document.getElementById('receiptTrxId').textContent = response.data.id;
+            } else {
+                document.getElementById('receiptTitle').textContent = 'Transaksi Gagal';
+                document.getElementById('receiptStatus').textContent = 'GAGAL';
+                document.getElementById('receiptTrxId').textContent = response.message || 'Error';
+            }
+            
+            receiptModal.style.display = 'block';
+
+            // Reset tombol beli
+            beliButton.textContent = 'Beli Sekarang';
+            beliButton.disabled = false;
+            currentDepositId = null; // Selesaikan sesi deposit
+        }
+
+        // Langkah 2.5: Batalkan Pembayaran QRIS
+        async function cancelQrisPayment() {
+            if (!currentDepositId) return;
+
+            clearInterval(qrisTimerInterval);
+            clearInterval(qrisPollingInterval);
+
+            const depositIdToCancel = currentDepositId;
+            currentDepositId = null; // Set null dulu agar polling berhenti
+
+            const response = await callApi('/deposit/cancel', { id: depositIdToCancel });
+
+            if (response.status === true) {
+                document.getElementById('qrisStatus').textContent = 'Pembayaran dibatalkan.';
+            } else {
+                document.getElementById('qrisStatus').textContent = 'Gagal membatalkan: ' + response.message;
+            }
+            
+            // Tutup modal setelah 2 detik
+            setTimeout(() => {
+                qrisModal.style.display = 'none';
+                beliButton.textContent = 'Beli Sekarang';
+                beliButton.disabled = false;
+            }, 2000);
+        }
+
+        cancelQrisButton.addEventListener('click', cancelQrisPayment);
+        closeQrisModal.addEventListener('click', cancelQrisPayment); // Tutup modal = batalkan
+
+        // --- Fungsi Tutup Modal Struk ---
+        function closeReceipt() {
+            receiptModal.style.display = 'none';
+            // Reset pilihan
+            nominalItems.forEach(i => i.classList.remove('selected'));
+            paymentItems.forEach(i => i.classList.remove('selected'));
+            selectedNominal = null;
+            selectedPayment = null;
+            userIdInput.value = '';
+            updateFooter();
+        }
+        closeReceiptModal.addEventListener('click', closeReceipt);
+        closeReceiptButton.addEventListener('click', closeReceipt);
+
+
+        // --- Tutup modal jika klik di luar area ---
+        window.addEventListener('click', (event) => {
+            if (event.target == whatsappModal) {
+                whatsappModal.style.display = 'none';
+            }
+            if (event.target == qrisModal) {
+                cancelQrisPayment(); // Klik di luar = batalkan
+            }
+            if (event.target == receiptModal) {
+                closeReceipt();
+            }
+        });
+
+    </script>
+    <script src="/anti-devtools.js"></script>
+    <script src="/api-config.js"></script>
+</body>
+</html>
