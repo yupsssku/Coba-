@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GamesNow - Top Up Game Instan</title>
+    <link rel="icon" href="https://reygenteng.github.io/gamesku/favicon.ico" type="image/png">
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --header-bg: #ffffff;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --icon-filter: none;
+            --border-color: #ddd;
+            --sidebar-bg: #ffffff;
+            --footer-bg: #1a2233; /* Warna gelap untuk footer baru */
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #222222;
+            --header-bg: #2c2c2c;
+            --text-color: #ffffff;
+            --card-bg: #2c2c2c;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --icon-filter: invert(1);
+            --border-color: #333;
+            --sidebar-bg: #2c2c2c;
+            --footer-bg: #161b22;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        /* --- Header & Search --- */
+        header {
+            background-color: var(--header-bg);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .menu-icon { width: 24px; filter: var(--icon-filter); cursor: pointer; }
+        .logo { height: 25px; }
+        .header-right { display: flex; align-items: center; gap: 15px; }
+        .theme-toggle { background: none; border: none; font-size: 1.2em; cursor: pointer; }
+        .search-icon { width: 24px; cursor: pointer; filter: var(--icon-filter); }
+
+        #searchContainer {
+            background-color: var(--header-bg);
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: none;
+            position: sticky;
+            top: 60px;
+            z-index: 99;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        /* --- Game Grid --- */
+        .banner-container { padding: 15px; }
+        .banner { width: 100%; border-radius: 15px; box-shadow: 0 4px 8px var(--shadow); }
+        .popular-games { padding: 0 15px 30px 15px; }
+        .section-title { font-size: 1.1em; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 5px; }
+        .games-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+        .game-item {
+            position: relative;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            text-decoration: none;
+            color: white;
+            aspect-ratio: 3/4;
+            box-shadow: 0 2px 5px var(--shadow);
+        }
+
+        .game-item img { width: 100%; height: 100%; object-fit: cover; }
+        .game-info {
+            position: absolute; bottom: 0; width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0, 0.9), transparent);
+            padding: 20px 5px 10px 5px; text-align: center; box-sizing: border-box;
+        }
+        .game-title { font-size: 0.75em; font-weight: bold; display: block; }
+        .game-publisher { font-size: 0.6em; color: #ddd; display: block; }
+
+        /* --- FOOTER BARU (Berdasarkan Foto) --- */
+        .main-footer {
+            background-color: var(--footer-bg);
+            color: #ffffff;
+            padding: 40px 20px;
+            text-align: left;
+        }
+
+        .footer-brand h2 { margin: 0; font-size: 1.5em; }
+        .footer-desc { font-size: 0.9em; color: #adb5bd; margin: 15px 0; line-height: 1.6; }
+        .footer-email { color: #ffffff; text-decoration: none; font-size: 0.9em; display: flex; align-items: center; gap: 8px; }
+
+        .footer-links-section { margin-top: 30px; }
+        .footer-links-section h3 { font-size: 1.2em; margin-bottom: 15px; }
+        .footer-links-section ul { list-style: none; padding: 0; }
+        .footer-links-section li { margin-bottom: 12px; }
+        .footer-links-section a { color: #adb5bd; text-decoration: none; font-size: 1em; }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 30px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.85em;
+            color: #adb5bd;
+        }
+
+        /* Sidebar & Overlay */
+        .sidebar { height: 100%; width: 0; position: fixed; z-index: 200; top: 0; left: 0; background-color: var(--sidebar-bg); overflow-x: hidden; transition: 0.3s; padding-top: 60px; }
+        .sidebar a { padding: 10px 20px; text-decoration: none; font-size: 18px; color: var(--text-color); display: block; }
+        .sidebar .closebtn { position: absolute; top: 10px; right: 20px; font-size: 36px; }
+        .overlay { position: fixed; display: none; width: 100%; height: 100%; top: 0; background-color: rgba(0,0,0,0.5); z-index: 150; }
+    </style>
+</head>
+<body>
+
+    <div id="myOverlay" class="overlay" onclick="closeNav()"></div>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="/">Beranda</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+    </div>
+
+    <header>
+        <div class="header-left">
+            <img src="https://api.iconify.design/ic:round-menu.svg" class="menu-icon" onclick="openNav()">
+            <img src="https://reygenteng.github.io/gamesku/gamesnow.png" class="logo">
+        </div>
+        <div class="header-right">
+            <button class="theme-toggle" id="themeBtn">🌙</button>
+            <img src="https://api.iconify.design/ic:baseline-search.svg" class="search-icon" onclick="toggleSearch()">
+        </div>
+    </header>
+
+    <div id="searchContainer">
+        <input type="text" id="searchInput" onkeyup="searchGame()" placeholder="Cari game...">
+    </div>
+
+    <main>
+        <div class="banner-container">
+            <img src="https://reygenteng.github.io/gamesku/banner.png" class="banner">
+        </div>
+
+        <div class="popular-games">
+            <div class="section-title">🔥 Lagi Populer</div>
+            <div class="games-grid" id="gamesList">
+                <a href="freefire" class="game-item">
+                    <img src="https://reygenteng.github.io/gamesku/ff.png">
+                    <div class="game-info"><span class="game-title">Free Fire</span><span class="game-publisher">Garena</span></div>
+                </a>
+                <a href="product/games/mobilelegends" class="game-item">
+                    <img src="https://reygenteng.github.io/gamesku/ml.png">
+                    <div class="game-info"><span class="game-title">Mobile Legends</span><span class="game-publisher">Moonton</span></div>
+                </a>
+                <a href="product/games/ghensin-impact" class="game-item">
+                    <img src="https://reygenteng.github.io/gamesku/gi.png">
+                    <div class="game-info"><span class="game-title">Genshin Impact</span><span class="game-publisher">HoYoverse</span></div>
+                </a>
+                <a href="product/games/honor-of-kings" class="game-item">
+                    <img src="https://reygenteng.github.io/gamesku/hok.png">
+                    <div class="game-info"><span class="game-title">Honor Of Kings</span><span class="game-publisher">HoYoverse</span></div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-brand">
+            <h2>gamesnowku.xyz</h2>
+            <p class="footer-desc">
+                Situs ini menyajikan berbagai topup game termurah dan teraman nomor 1 di dunia!   </p>
+            <a href="mailto:Info@gamesnowku.xyz" class="footer-email">
+                📧 Info@gamesnowku.xyz
+                📱 +62 895 2503 6410
+            </a>
+        </div>
+
+        <div class="footer-links-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-bottom">
+            Copyright © 2025 gamesnowku.xyz
+        </div>
+    </footer>
+
+    <script src="footage.js"></script>
+    <script>
+        // Fitur Search
+        function toggleSearch() {
+            let s = document.getElementById("searchContainer");
+            s.style.display = (s.style.display === "block") ? "none" : "block";
+        }
+        function searchGame() {
+            let filter = document.getElementById("searchInput").value.toUpperCase();
+            let items = document.getElementsByClassName("game-item");
+            for (let i = 0; i < items.length; i++) {
+                let title = items[i].querySelector(".game-title").innerText;
+                items[i].style.display = title.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+            }
+        }
+        // Sidebar
+        function openNav() { document.getElementById("mySidebar").style.width = "250px"; document.getElementById("myOverlay").style.display = "block"; }
+        function closeNav() { document.getElementById("mySidebar").style.width = "0"; document.getElementById("myOverlay").style.display = "none"; }
+        // Dark Mode
+        const btn = document.getElementById('themeBtn');
+        btn.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            btn.innerText = isDark ? '🌙' : '🌞';
+        });
+    </script>
+</body>
+</html>
