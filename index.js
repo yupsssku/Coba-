@@ -1,58 +1,79 @@
-const express = require('express');
-const path = require('path');
+const axios = require('axios');
 
-const app = express();
+module.exports = async (req, res) => {
+  // Set CORS headers untuk hanya mengizinkan gamesnowku.xyz
+  const allowedOrigins = [
+    'https://gamesnowku.xyz/freefire/',
+    'https://www.gamesnowku.xyz/mobilelegends/'
+  ];
+  
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  );
 
-app.use(express.json());
-// Middleware untuk file statis
-app.use(express.static(path.join(__dirname, 'public')));
+  // Handle OPTIONS request for CORS
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
 
-// Endpoint untuk konfigurasi API
-app.get('/api-config.js', (req, res) => {
-    res.setHeader('Content-Type', 'application/javascript');
-    res.send(`
-        // --- KONFIGURASI API ---
-        window.API_KEY = "ftS3uUCMOz71uxhWp9MsVQchbBNQXLOcLJpkQW1W9aQgQkHW7bV54P6fKeWrzIWJf44nuuUhPTMQHY8lCtslMfez";//ganti apikey kamu
-        window.API_BASE_URL = "https://atlantich2h.com";//Jangan diganti kalau gamau error
-        window.NOMOR_WHATSAPP = "6289525036410";//ganti no wa cs. no wa ini berfungsi untuk method pembayaran lain
-    `);
-});
+  try {
+    const { id, server } = req.query;
+    
+    if (!id || !server) {
+      return res.status(400).json({
+        success: false,
+        message: 'Parameter id dan server diperlukan',
+        example: '/api/ml?id=1114917746&server=13486'
+      });
+    }
 
-// Route khusus untuk halaman produk
-app.get('/product/games/freefire', (req, res) => {
-    res.sendFile(path.join(__dirname, 'view', 'freefire', 'index.html'));
-});
-
-app.get('/product/games/mobilelegends', (req, res) => {
-    res.sendFile(path.join(__dirname, 'view', 'mobilelegends', 'index.html'));
-});
-
-// Redirect untuk URL yang salah
-app.get('/freefire', (req, res) => {
-    res.redirect('/product/games/freefire');
-});
-
-app.get('/mobilelegends', (req, res) => {
-    res.redirect('/product/games/mobilelegends');
-});
-
-// Handler untuk halaman utama (root)
-app.get('/', (req, res) => {
-    // Jika ada index.html di public, akan otomatis dilayani oleh express.static
-    // Tapi kita bisa tambahkan custom logic di sini jika perlu
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// 404 Handler - HARUS di paling akhir
-app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
-});
-
-// Error handler untuk server errors (500)
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).sendFile(path.join(__dirname, 'public', '500.html'));
-});
-
-// Ekspor app untuk Vercel
-module.exports = app;
+    const apiUrl = `https://api.isan.eu.org/nickname/ml?id=${id}&server=${server}`;
+    console.log('Fetching Mobile Legends data from:', apiUrl);
+    
+    const response = await axios.get(apiUrl, { 
+      timeout: 10000,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      }
+    });
+    
+    res.json({
+      success: true,
+      game: "Mobile Legends",
+      id: id,
+      server: server,
+      data: response.data
+    });
+    
+  } catch (error) {
+    console.error('Error fetching Mobile Legends data:', error.message);
+    
+    if (error.response) {
+      res.status(error.response.status).json({
+        success: false,
+        message: 'Error dari API external Mobile Legends',
+        error: error.response.data
+      });
+    } else if (error.request) {
+      res.status(503).json({
+        success: false,
+        message: 'Tidak dapat terhubung ke API external Mobile Legends'
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  }
+};
